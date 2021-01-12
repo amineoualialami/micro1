@@ -1,10 +1,10 @@
 {
-  "family": "dcdojo",
+  "family": "micro1",
   "executionRoleArn": "arn:aws:iam::326646175787:role/ecsTaskExecutionRole",
   "containerDefinitions": [
       {
-          "name": "dcdojo-container",
-          "image": "326646175787.dkr.ecr.us-east-2.amazonaws.com/dcdojo-amine:4655390a2d95f72f5f379cb62618a305641987ba",
+          "name": "micro1-container",
+          "image": "326646175787.dkr.ecr.us-east-2.amazonaws.com/micro1:4655390a2d95f72f5f379cb62618a305641987ba",
           "cpu": 512,
           "portMappings": [
             {
