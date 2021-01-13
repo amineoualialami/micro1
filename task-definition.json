@@ -9,7 +9,6 @@
       "memoryReservation": 256,
       "portMappings": [
         {
-          "hostPort": 0,
           "containerPort": 2000,
           "protocol": "udp"
         }
@@ -19,18 +18,12 @@
       "name": "micro1-container",
       "image": "326646175787.dkr.ecr.us-east-2.amazonaws.com/micro1:4655390a2d95f72f5f379cb62618a305641987ba",
       "cpu": 512,
-      "environment": [
-        { "name" : "AWS_XRAY_DAEMON_ADDRESS", "value" : "xray-daemon:2000" }
-      ],
       "portMappings": [
         {
           "hostPort": 8888,
           "protocol": "tcp",
           "containerPort": 8888
         }
-      ],
-      "links": [
-        "xray-daemon"
       ],
       "memory": 1024,
       "essential": true,
