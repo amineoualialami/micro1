@@ -7,6 +7,14 @@
       "image": "amazon/aws-xray-daemon",
       "cpu": 32,
       "memoryReservation": 256,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/dcdojo",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
       "portMappings": [
         {
           "hostPort": 2000,
