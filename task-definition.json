@@ -1,6 +1,7 @@
 {
   "family": "micro1",
   "executionRoleArn": "arn:aws:iam::326646175787:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::326646175787:instance-profile/xray-daemon",
   "containerDefinitions": [
     {
       "name": "xray-daemon",
