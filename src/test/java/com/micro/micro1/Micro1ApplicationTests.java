@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class Micro1ApplicationTests {
 
-	@Test
+	//@Test
 	public void contextLoads() {
 	}
 
