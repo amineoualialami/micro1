@@ -1,8 +1,10 @@
 package com.micro.micro1;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,10 +15,18 @@ public class HelloRestController {
   private HelloService helloService;
   
   
-  @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String greetinhellog() {
-        return helloService.greetingHello();
-    }
+  @GetMapping(value = "/hello")
+  public String greetinhellog() {
+      return helloService.greetingHello();
+  }
+
+  @PostMapping(value = "/process")
+  public void processRequest(@RequestBody  RequestDto requestDto) throws Exception {
+      helloService.processRequest(requestDto);
+  }
+  
+
+  
   
 
 }
