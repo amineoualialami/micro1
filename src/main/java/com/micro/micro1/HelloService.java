@@ -1,14 +1,18 @@
 package com.micro.micro1;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import com.amazonaws.xray.proxies.apache.http.HttpClientBuilder;
 import com.amazonaws.xray.spring.aop.XRayEnabled;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -42,31 +46,25 @@ public class HelloService {
     }
 
     public void processRequest(RequestDto requestDto) throws Exception {
-        processService.processRequest(requestDto); 
-        processRequestMicro2(requestDto);       
+        processService.processRequest(requestDto);
+        processRequestMicro2(requestDto);
     }
 
-
-    private void processRequestMicro2(RequestDto requestDto){
+    private void processRequestMicro2(RequestDto requestDto) throws JsonProcessingException,
+            UnsupportedEncodingException, ClientProtocolException, ParseException, IOException {
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost("http://micro2-service.local:8888/micro2/process");
-        try {
-            //Creating the ObjectMapper object
-            ObjectMapper mapper = new ObjectMapper();
-            //Converting the Object to JSONString
-            String requestDtoString = mapper.writeValueAsString(requestDto);
-            httpPost.setEntity(new StringEntity(requestDtoString));
-            CloseableHttpResponse response = null;
-            response = httpclient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            String result = EntityUtils.toString(entity);
-            response.close();
-         } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-            System.out.println(e1.getMessage());
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+        //Creating the ObjectMapper object
+        ObjectMapper mapper = new ObjectMapper();
+        //Converting the Object to JSONString
+        String requestDtoString = mapper.writeValueAsString(requestDto);
+        httpPost.setEntity(new StringEntity(requestDtoString));
+        CloseableHttpResponse response = null;
+        response = httpclient.execute(httpPost);
+        HttpEntity entity = response.getEntity();
+        String result = EntityUtils.toString(entity);
+        response.close();
+         
     }
 
   
