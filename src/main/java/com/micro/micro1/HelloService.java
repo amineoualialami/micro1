@@ -45,12 +45,12 @@ public class HelloService {
         return null;
     }
 
-    public void processRequest(RequestDto requestDto) throws Exception {
+    public String processRequest(RequestDto requestDto) throws Exception {
         processService.processRequest(requestDto);
-        processRequestMicro2(requestDto);
+        return processRequestMicro2(requestDto);
     }
 
-    private void processRequestMicro2(RequestDto requestDto) throws JsonProcessingException,
+    private String processRequestMicro2(RequestDto requestDto) throws JsonProcessingException,
             UnsupportedEncodingException, ClientProtocolException, ParseException, IOException {
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost("http://micro2-service.local:8888/micro2/process");
@@ -64,6 +64,7 @@ public class HelloService {
         HttpEntity entity = response.getEntity();
         String result = EntityUtils.toString(entity);
         response.close();
+        return result;
          
     }
 

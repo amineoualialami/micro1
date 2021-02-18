@@ -21,8 +21,8 @@ public class HelloRestController {
   }
 
   @PostMapping(value = "/process")
-  public void processRequest(@RequestBody  RequestDto requestDto) throws Exception {
-      helloService.processRequest(requestDto);
+  public String processRequest(@RequestBody  RequestDto requestDto) throws Exception {
+      return helloService.processRequest(requestDto);
   }
   
 
