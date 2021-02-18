@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -54,6 +55,7 @@ public class HelloService {
             UnsupportedEncodingException, ClientProtocolException, ParseException, IOException {
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost("http://micro2-service.local:8888/micro2/process");
+        httpPost.addHeader("Content-Type", "application/json");
         //Creating the ObjectMapper object
         ObjectMapper mapper = new ObjectMapper();
         //Converting the Object to JSONString
